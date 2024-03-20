@@ -1,4 +1,4 @@
-# output "variable" {
-#   description = "output variable description"
-#   value       = variable.main.name
-# }
+output "name_servers" {
+  description = "A list of Cloudflare-assigned name servers."
+  value       = cloudflare_zone.main.name_servers
+}

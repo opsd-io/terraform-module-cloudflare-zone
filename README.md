@@ -6,21 +6,21 @@
 
 Meet **OPSd**. The unique and effortless way of managing cloud infrastructure.
 
-# terraform-module-template
+# terraform-module-cloudflare-zone
 
 ## Introduction
 
-What does the module provide?
+Terraform module to manage CloudFlare DNS zone resources.
 
 ## Usage
 
 ```hcl
-module "module_name" {
-  source  = "github.com/opsd-io/module_name?ref=v0.0.1"
+module "example" {
+  source = "github.com/opsd-io/terraform-module-cloudflare-zone"
 
-  # Variables
-  variable_1 = "foo"
-  variable_2 = "bar"
+  zone_name             = "example.io"
+  records               = local.records
+  cloudflare_account_id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 }
 ```
 
@@ -31,11 +31,14 @@ module "module_name" {
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.1 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.5.7 |
+| <a name="requirement_cloudflare"></a> [cloudflare](#requirement\_cloudflare) | 4.26.0 |
 
 ## Providers
 
-No providers.
+| Name | Version |
+|------|---------|
+| <a name="provider_cloudflare"></a> [cloudflare](#provider\_cloudflare) | 4.26.0 |
 
 ## Modules
 
@@ -43,15 +46,33 @@ No modules.
 
 ## Resources
 
-No resources.
+| Name | Type |
+|------|------|
+| [cloudflare_record.a](https://registry.terraform.io/providers/cloudflare/cloudflare/4.26.0/docs/resources/record) | resource |
+| [cloudflare_record.cname](https://registry.terraform.io/providers/cloudflare/cloudflare/4.26.0/docs/resources/record) | resource |
+| [cloudflare_record.mx](https://registry.terraform.io/providers/cloudflare/cloudflare/4.26.0/docs/resources/record) | resource |
+| [cloudflare_record.srv](https://registry.terraform.io/providers/cloudflare/cloudflare/4.26.0/docs/resources/record) | resource |
+| [cloudflare_record.txt](https://registry.terraform.io/providers/cloudflare/cloudflare/4.26.0/docs/resources/record) | resource |
+| [cloudflare_zone.main](https://registry.terraform.io/providers/cloudflare/cloudflare/4.26.0/docs/resources/zone) | resource |
+| [cloudflare_zone_dnssec.main](https://registry.terraform.io/providers/cloudflare/cloudflare/4.26.0/docs/resources/zone_dnssec) | resource |
 
 ## Inputs
 
-No inputs.
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| <a name="input_cloudflare_account_id"></a> [cloudflare\_account\_id](#input\_cloudflare\_account\_id) | CloudFlare account id. | `string` | n/a | yes |
+| <a name="input_dnssec"></a> [dnssec](#input\_dnssec) | Whether DNSSEC is enabled. | `bool` | `false` | no |
+| <a name="input_jump_start"></a> [jump\_start](#input\_jump\_start) | Whether to scan for DNS records on creation. Ignored after zone is created. | `bool` | `false` | no |
+| <a name="input_paused"></a> [paused](#input\_paused) | Whether this zone is paused (traffic bypasses Cloudflare). | `bool` | `false` | no |
+| <a name="input_plan"></a> [plan](#input\_plan) | CloudFlare commercial plan. | `string` | `"free"` | no |
+| <a name="input_records"></a> [records](#input\_records) | A list of DNS zone records. | <pre>list(object({<br>    name     = string<br>    type     = string<br>    content  = optional(list(string))<br>    data     = optional(map(string))<br>    priority = optional(number)<br>    proxied  = optional(bool)<br>    ttl      = optional(number)<br>  }))</pre> | n/a | yes |
+| <a name="input_zone_name"></a> [zone\_name](#input\_zone\_name) | The zone name. | `string` | n/a | yes |
 
 ## Outputs
 
-No outputs.
+| Name | Description |
+|------|-------------|
+| <a name="output_name_servers"></a> [name\_servers](#output\_name\_servers) | A list of Cloudflare-assigned name servers. |
 <!-- END_TF_DOCS -->
 
 ## Examples of usage
