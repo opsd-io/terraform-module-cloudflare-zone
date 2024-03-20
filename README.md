@@ -18,7 +18,8 @@ Terraform module to manage CloudFlare DNS zone resources.
 module "example" {
   source = "github.com/opsd-io/terraform-module-cloudflare-zone"
 
-  dns_zones             = local.dns_zones
+  zone_name             = "example.io"
+  records               = local.records
   cloudflare_account_id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 }
 ```
