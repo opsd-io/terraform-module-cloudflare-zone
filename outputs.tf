@@ -1,4 +1,5 @@
-# output "variable" {
-#   description = "output variable description"
-#   value       = variable.main.name
-# }
+output "nameservers" {
+  value = {
+    for k, v in cloudflare_zone.main : k => v.name_servers
+  }
+}
