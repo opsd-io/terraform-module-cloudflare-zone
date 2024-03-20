@@ -120,7 +120,7 @@ resource "cloudflare_record" "txt" {
 
 resource "cloudflare_record" "srv" {
   for_each = {
-    for record in local.data_records : "${record.name}" => record
+    for record in local.data_records : record.name => record
     if record.type == "SRV"
   }
 
