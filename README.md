@@ -59,15 +59,19 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_cloudflare_account_id"></a> [cloudflare\_account\_id](#input\_cloudflare\_account\_id) | CloudFlare account id | `string` | n/a | yes |
-| <a name="input_dns_zones"></a> [dns\_zones](#input\_dns\_zones) | n/a | <pre>map(object({<br>    dnssec     = optional(bool, false)<br>    jump_start = optional(bool, false)<br>    paused     = optional(bool, false)<br>    records = list(object({<br>      name     = string<br>      type     = string<br>      content  = optional(list(string))<br>      data     = optional(map(string))<br>      priority = optional(number)<br>      proxied  = optional(bool)<br>      ttl      = optional(number)<br>    }))<br>  }))</pre> | n/a | yes |
-| <a name="input_plan"></a> [plan](#input\_plan) | CloudFlare commercial plan | `string` | `"free"` | no |
+| <a name="input_cloudflare_account_id"></a> [cloudflare\_account\_id](#input\_cloudflare\_account\_id) | CloudFlare account id. | `string` | n/a | yes |
+| <a name="input_dnssec"></a> [dnssec](#input\_dnssec) | Whether DNSSEC is enabled. | `bool` | `false` | no |
+| <a name="input_jump_start"></a> [jump\_start](#input\_jump\_start) | Whether to scan for DNS records on creation. Ignored after zone is created. | `bool` | `false` | no |
+| <a name="input_paused"></a> [paused](#input\_paused) | Whether this zone is paused (traffic bypasses Cloudflare). | `bool` | `false` | no |
+| <a name="input_plan"></a> [plan](#input\_plan) | CloudFlare commercial plan. | `string` | `"free"` | no |
+| <a name="input_records"></a> [records](#input\_records) | A list of DNS zone records. | <pre>list(object({<br>    name     = string<br>    type     = string<br>    content  = optional(list(string))<br>    data     = optional(map(string))<br>    priority = optional(number)<br>    proxied  = optional(bool)<br>    ttl      = optional(number)<br>  }))</pre> | n/a | yes |
+| <a name="input_zone_name"></a> [zone\_name](#input\_zone\_name) | The zone name. | `string` | n/a | yes |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| <a name="output_nameservers"></a> [nameservers](#output\_nameservers) | A list of Cloudflare-assigned name servers. |
+| <a name="output_name_servers"></a> [name\_servers](#output\_name\_servers) | n/a |
 <!-- END_TF_DOCS -->
 
 ## Examples of usage
