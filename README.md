@@ -72,7 +72,7 @@ No modules.
 
 | Name | Description |
 |------|-------------|
-| <a name="output_name_servers"></a> [name\_servers](#output\_name\_servers) | n/a |
+| <a name="output_name_servers"></a> [name\_servers](#output\_name\_servers) | A list of Cloudflare-assigned name servers. |
 <!-- END_TF_DOCS -->
 
 ## Examples of usage
