@@ -73,11 +73,13 @@ resource "cloudflare_record" "a" {
     if record.type == "A"
   }
 
-  zone_id = cloudflare_zone.main[each.value.zone_id].id
-  name    = each.value.name
-  value   = each.value.content
-  type    = "A"
-  proxied = true
+  zone_id  = cloudflare_zone.main[each.value.zone_id].id
+  name     = each.value.name
+  value    = each.value.content
+  type     = "A"
+  priority = try(each.value.priority, null)
+  proxied  = try(each.value.proxied, true)
+  ttl      = try(each.value.ttl, null)
 }
 
 resource "cloudflare_record" "cname" {
@@ -86,11 +88,13 @@ resource "cloudflare_record" "cname" {
     if record.type == "CNAME"
   }
 
-  zone_id = cloudflare_zone.main[each.value.zone_id].id
-  name    = each.value.name
-  value   = each.value.content
-  type    = "CNAME"
-  proxied = true
+  zone_id  = cloudflare_zone.main[each.value.zone_id].id
+  name     = each.value.name
+  value    = each.value.content
+  type     = "CNAME"
+  priority = try(each.value.priority, null)
+  proxied  = try(each.value.proxied, true)
+  ttl      = try(each.value.ttl, null)
 }
 
 resource "cloudflare_record" "mx" {
@@ -103,7 +107,9 @@ resource "cloudflare_record" "mx" {
   name     = each.value.name
   value    = each.value.content
   type     = "MX"
-  priority = each.value.priority
+  priority = try(each.value.priority, null)
+  proxied  = try(each.value.proxied, null)
+  ttl      = try(each.value.ttl, null)
 }
 
 resource "cloudflare_record" "txt" {
@@ -112,10 +118,13 @@ resource "cloudflare_record" "txt" {
     if record.type == "TXT"
   }
 
-  zone_id = cloudflare_zone.main[each.value.zone_id].id
-  name    = each.value.name
-  value   = each.value.content
-  type    = "TXT"
+  zone_id  = cloudflare_zone.main[each.value.zone_id].id
+  name     = each.value.name
+  value    = each.value.content
+  type     = "TXT"
+  priority = try(each.value.priority, null)
+  proxied  = try(each.value.proxied, null)
+  ttl      = try(each.value.ttl, null)
 }
 
 resource "cloudflare_record" "srv" {
@@ -124,9 +133,12 @@ resource "cloudflare_record" "srv" {
     if record.type == "SRV"
   }
 
-  zone_id = cloudflare_zone.main[each.value.zone_id].id
-  name    = each.value.name
-  type    = "SRV"
+  zone_id  = cloudflare_zone.main[each.value.zone_id].id
+  name     = each.value.name
+  type     = "SRV"
+  priority = try(each.value.priority, null)
+  proxied  = try(each.value.proxied, null)
+  ttl      = try(each.value.ttl, null)
 
   data {
     service  = try(each.value.data.service, "")

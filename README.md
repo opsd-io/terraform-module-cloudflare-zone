@@ -60,7 +60,7 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_cloudflare_account_id"></a> [cloudflare\_account\_id](#input\_cloudflare\_account\_id) | CloudFlare account id | `string` | n/a | yes |
-| <a name="input_dns_zones"></a> [dns\_zones](#input\_dns\_zones) | n/a | <pre>map(object({<br>    dnssec     = optional(bool, false)<br>    jump_start = optional(bool, false)<br>    paused     = optional(bool, false)<br>    records = list(object({<br>      name     = string<br>      type     = string<br>      content  = optional(list(string))<br>      data     = optional(map(string))<br>      priority = optional(number)<br>    }))<br>  }))</pre> | n/a | yes |
+| <a name="input_dns_zones"></a> [dns\_zones](#input\_dns\_zones) | n/a | <pre>map(object({<br>    dnssec     = optional(bool, false)<br>    jump_start = optional(bool, false)<br>    paused     = optional(bool, false)<br>    records = list(object({<br>      name     = string<br>      type     = string<br>      content  = optional(list(string))<br>      data     = optional(map(string))<br>      priority = optional(number)<br>      proxied  = optional(bool)<br>      ttl      = optional(number)<br>    }))<br>  }))</pre> | n/a | yes |
 | <a name="input_plan"></a> [plan](#input\_plan) | CloudFlare commercial plan | `string` | `"free"` | no |
 
 ## Outputs

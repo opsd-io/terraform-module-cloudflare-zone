@@ -21,6 +21,8 @@ variable "dns_zones" {
       content  = optional(list(string))
       data     = optional(map(string))
       priority = optional(number)
+      proxied  = optional(bool)
+      ttl      = optional(number)
     }))
   }))
 }
